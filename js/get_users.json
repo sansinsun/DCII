@@ -1,0 +1,11 @@
+<script>
+
+      $('form').jsonForm{
+      "url": "http://localhost:5000/api/users",
+      "raw_url": "http://localhost:5000/api/users",
+      "method": "get",
+      "headers": {
+        "accept": "application/json"
+        }
+      }
+</script>
