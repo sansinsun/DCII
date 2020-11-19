@@ -5,6 +5,13 @@
         include "head.php";
     ?>
 </head>
+<?php  
+      
+      $sumber_detail = 'http://188.166.221.219:5000/api/registry';
+      $konten_detail = file_get_contents($sumber_detail);
+      $data_detail = json_decode($konten_detail, true);
+      
+?>
 <body id="page-top">
   <div id="wrapper">
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -19,17 +26,25 @@
         ?>
       <div class="container">
         <h1 class="text-center"><b>Add Event</b></h1>
-        <form>
-          <div class="form-group row">
+        <form method="POST" action="post_event_json.php">
+          <div class="form-group row"">
             <label for="cuid" class="col-sm-2 col-form-label">Component Unique ID</label>
               <div class="col-sm-9">
-                <input type="Text" class="form-control" id="cuid">
+              <select class="form-control" id="kode" placeholder="event" required>
+                <option value="" selected disabled>Select Component Unique ID</option>
+                <?php   
+                        for( $a=0; $a < count($data_detail); $a++)
+                        {
+                          print "<option>".$data_detail[$a]['Code']."</option>";
+                        }
+                    ?>               
+                 </select>              
               </div>
           </div>	
           <div class="form-group row">
 	        	<label for="loc" class="col-sm-2 col-form-label">Type Of Event</label>
             <div class="col-sm-4">
-              <select class="form-control" id="event" placeholder="event">
+              <select class="form-control" id="nama_event" placeholder="event" required>
                 <option value="" selected disabled>Select Type of Event</option>
                 <option>Repair</option>
                 <option>Tighening</option>
@@ -38,22 +53,26 @@
                 <option>Thermal Picture</option>
               </select>
             </div>
-            <div class="input-group-prepend col-sm-1">
+            <div class="input-group-prepend col-sm-1 ">
 	        	<label for="loc" class="col-sm-2 col-form-label">Upload</label>
             </div>
+            <!-- <form method="POST" action="post_event.php" enctype="multipart/form-data"> -->
+
             <div class="custom-file col-sm-4">
-              <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            <input type="file" name='myFile' class="custom-file-input" id="myFile"/>
+                <label class="custom-file-label" for="myFile">Choose file</label>
+
             </div>
           </div>
+            <!-- </form> -->
           <div class="form-group row">
             <label for="date" class="col-sm-2 col-form-label">Date Of Event</label>
             <div class="col-sm-4">
-              <input type="date" class="form-control" id="date">
+              <input type="date" class="form-control" id="tgl" required>
             </div>
           </div>
           
-          <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#success" style="float:right; margin-right:90px; width:150px;">Submit</button>
+          <button type="Submit" value="Upload File" data-target="#success" class="btn btn-primary btn-md" data-toggle="modal" style="float:right; margin-right:90px; width:150px;">Submit</button>
           <button type="reset" class="btn btn-danger btn-md" style="float:right; margin-right:20px; width:150px;">Cancel</button>
         </form>
       </div>
@@ -119,5 +138,47 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/sb-admin-2.min.js"></script>
+  <script>
+  var $url = "http://188.166.221.219:5000/api/registry";
+//name is the id of the textbox where autocomplete needs to be shown
+$('#code').autocomplete(
+{ 
+source: function(request,response)  
+{ 
+
+  //gets data from the url in JSON format
+  $.get($url, function(data)
+  {         
+    obj = JSON.parse(data);   //parse the data in JSON (if not already)
+    response($.map(obj, function(item)
+    {
+      return {
+        label: item.Code,
+        value: item.Code,
+        id:item.id,
+      
+      }
+    }
+  ));        //end response
+});          //end get
+},
+select:function(event, ui)
+{ 
+ console.log(ui.item.code);
+}   
+
+}); //end of autocomplete
+
+</script>
+         <script>
+            $('#myFile').on('change',function(){
+                //get the file name
+                var fileName = $(this).val().split("\\").pop();;
+
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+        </script>
+
 </body>
 </html>

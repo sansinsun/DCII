@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <?php
         include "head.php";
     ?>
+  
 </head>
 <body id="page-top">
   <div id="wrapper">
@@ -19,14 +21,20 @@
         ?>
       <div class="container">
         <h1 class="text-center"><b>Add new Component</b></h1>
-          <form id="addComponent">
+          <form  method="POST" action="post_component.php">
             <div class="form-group row">
               <label for="loc" class="col-sm-2 col-form-label">Location</label>
-              <div class="col-sm-3">
-                <input type="text" class="form-control" id="building" placeholder="Building">
+              <div class="col-sm-2">
+              <select class="form-control"  name="gedung" placeholder="Building" required>
+                  <option value="" selected disabled>Building</option>
+                  <option>OFFICE</option>
+                  <option>JK1</option>
+                  <option>JK2</option>
+                  <option>JK3</option>
+                </select>                
               </div>
-              <div class="col-sm-3">
-                <select class="form-control" id="floor" placeholder="Floor">
+              <div class="col-sm-2">
+                <select class="form-control"  name="lantai" placeholder="Floor" required>
                   <option value="" selected disabled>Floor</option>
                   <option>F1</option>
                   <option>F2</option>
@@ -35,14 +43,34 @@
                 </select>
               </div>
               <div class="col-sm-3">
-                <input type="text" class="form-control" id="cabinet" placeholder="Cabinet">
+                <select class="form-control"  name="room" placeholder="Room" required>
+                  <option value="" selected disabled>Room</option>
+                  <option>F1</option>
+                  <option>F2</option>
+                  <option>F3</option>
+                  <option>F4</option>
+                </select>
+              </div>
+              <div class="col-sm-2">
+              <select class="form-control"  name="cabinet" placeholder="Cabinet" required>
+              <option value="" selected disabled>Cubicle</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                </select>              
               </div>
             </div>
 
             <div class="form-group row">
-              <label for="type" class="col-sm-2 col-form-label">Type</label>
+              <label for="type" class="col-sm-2 col-form-label" >Type</label>
               <div class="col-sm-4">
-                <select class="form-control" id="c_type">
+                <select class="form-control" name="c_type" required>
                   <option value="" selected disabled></option>
                   <option>USB</option>
                   <option>UDB</option>
@@ -51,33 +79,39 @@
               </div>
               <label for="element" class="col-sm-1 col-form-label">Element</label>
               <div class="col-sm-4">
-                <select class="form-control" id="Element" id="element">
+                <select class="form-control"  name="element" required>
                   <option value="" selected disabled></option>
-                  <option>Metering & Indicators</option>
+                  <option>Metering</option>
+                  <option>Indicators</option>
                   <option>Control</option>
                   <option>ACB Wiring</option>
-                  <option>MCCB Wiring / Termination</option>
+                  <option>MCBB Wiring / Termination</option>
                   <option>Busbar Termination</option>
-                  <option>Backside Termination</option>
-                  <option>Incoming Outgoing</option>
-                  <option>CT & V Tapping</option>           
-                </select>         
+                  <option>Incoming & Outgoing Cable Termination</option>
+                  <option>CT & VT Tapping</option>           
+                  <option>MCB Termination</option>
+                  <option>Contactor</option>
+                  <option>Termination</option>
+                  <option>Cable & Connection</option>
+                </select>           
               </div>
             </div>
             <div class="form-group row">
-              <label for="date" class="col-sm-2 col-form-label">Date</label>
+              <label for="date" class="col-sm-2 col-form-label" name="installDate" required>Installation Date</label>
               <div class="col-sm-4">
-                <input type="date" class="form-control" id="date">
+                <input type="date" class="form-control" name="date">
               </div>
             </div>
             <div class="form-group row">
               <label for="notes" class="col-sm-2 col-form-label">Notes</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="notes">
+                <input type="text" class="form-control" name="notes">
               </div>
             </div>
-            <a href="#" onclick="document.getElementById('addComponent').submit();" type="button" id="submitComponent" class="btn btn-primary btn-md" style="float:right; margin-right:90px; width:150px;">Save</a>
+
+            <button type="submit" data-toggle="modal" data-target="#success" class="btn btn-primary btn-md"  style="float:right; margin-right:90px; width:150px;">Save</a>
             <button type="reset" class="btn btn-danger btn-md" style="float:right; margin-right:20px; width:150px;">Reset</button>
+          
           </form>
       </div>
      </div>
@@ -128,90 +162,6 @@
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="js/sb-admin-2.min.js"></script>
-  <script>
-    window.addEventListener( 'load', function () {
 
-      // These variables are used to store the form data
-      const text = document.getElementById( "building" );
-      const text = document.getElementById( "floor" );
-      const text = document.getElementById( "cabinet" );
-      const text = document.getElementById( "c_type" );
-      const text = document.getElementById( "element" );
-      const text = document.getElementById( "theText" );
-      const text = document.getElementById( "date" );
-      const text = document.getElementById( "notes" );
-
-
-
-
-      // Use the FileReader API to access file content
-
-      // sendData is our main function
-      function sendData() {
-        // If there is a selected file, wait it is read
-        // If there is not, delay the execution of the function
-        if( !file.binary && file.dom.files.length > 0 ) {
-          setTimeout( sendData, 10 );
-          return;
-        }
-
-        // To construct our multipart form data request,
-        // We need an XMLHttpRequest instance
-        const XHR = new XMLHttpRequest();
-
-        // We need a separator to define each part of the request
-        const boundary = "blob";
-
-        // Store our body request in a string.
-        let data = "";
-
-        // So, if the user has selected a file
-        // Text data is simpler
-        // Start a new part in our body's request
-        data += "--" + boundary + "\r\n";
-
-        // Say it's form data, and name it
-        data += 'content-disposition: form-data; name="' + text.name + '"\r\n';
-        // There's a blank line between the metadata and the data
-        data += '\r\n';
-
-        // Append the text data to our body's request
-        data += text.value + "\r\n";
-
-        // Once we are done, "close" the body's request
-        data += "--" + boundary + "--";
-
-        // Define what happens on successful data submission
-        XHR.addEventListener( 'load', function( event ) {
-          alert( 'Yeah! Data sent and response loaded.' );
-        } );
-
-        // Define what happens in case of error
-        XHR.addEventListener( 'error', function( event ) {
-          alert( 'Oops! Something went wrong.' );
-        } );
-
-        // Set up our request
-        XHR.open( 'POST', 'http://localhost:5000/api/registry' );
-
-        // Add the required HTTP header to handle a multipart form data POST request
-        XHR.setRequestHeader( 'Content-Type','multipart/form-data; boundary=' + boundary );
-
-        // And finally, send our data.
-        XHR.send( data );
-      }
-
-      // Access our form...
-      const form = document.getElementById( "addComponent" );
-
-      // ...to take over the submit event
-      form.getElementById("submitComponent").addEventListener( 'submit', function ( event ) {
-        event.preventDefault();
-        sendData();
-      } );
-      } );
-
-
-  </script>
 </body>
 </html>

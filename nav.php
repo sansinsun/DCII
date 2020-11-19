@@ -38,6 +38,19 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="py-2 collapse-inner rounded">
             <a class="collapse-item text-menu" href="event_list.php">Event History</a>
+            <a class="collapse-item text-menu" href="add_event.php">Add Event</a>
+
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-bezier-curve"></i>
+        <span>Predictions</span>
+        </a>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="py-2 collapse-inner">
+            <a class="collapse-item" href="prediction_list.php">Prediction List</a>
           </div>
         </div>
       </li>

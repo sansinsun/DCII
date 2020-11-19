@@ -11,6 +11,10 @@
   $sumber_detail = 'http://188.166.221.219:5000/api/registry';
   $konten_detail = file_get_contents($sumber_detail);
   $data_detail = json_decode($konten_detail, true);
+
+  $sumber_predict = 'http://188.166.221.219:5000/api/predictions';
+  $konten_predict = file_get_contents($sumber_predict);
+  $data_predict = json_decode($konten_predict, true);
   
   ?>
   <body id="page-top">
@@ -40,67 +44,57 @@
           <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Component List</h1>
+            <h1 class="h3 mb-2 text-gray-800">Predictions List</h1>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-8">
               <div class="card-header py-4">
-                <h6 class="m-0 font-weight-bold text-primary">Component List</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Predictions List</h6>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table class="table table-bordered display responsive  desktop" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                       <tr id="event_detail">
-                        <th>Unique ID</th>
+                        <th>Code</th>
                         <th>Building</th>
                         <th>Floor</th>
-                        <th>Room</th>
-
-                        <th>Type</th>
                         <th>Cubicle</th>
-                        <th>Component</th>
-                        <th>Installation Date</th>
-
-                        <th>Notes</th>
+                        <th>Type</th>
+                        <th>Predition Date</th>
+                        <th>Recomended Action</th>
+                        <th>Risk</th>
                         <th>Action</th>                      
                       </tr>
                     </thead>
                     <tfoot>
                       <tr>
-                      <th>Unique ID</th>
+                      <tr id="event_detail">
+                        <th>Code</th>
                         <th>Building</th>
                         <th>Floor</th>
-                        <th>Room</th>
-
-                        <th>Type</th>
                         <th>Cubicle</th>
-                        <th>Component</th>
-                        <th>Installation Date</th>
-
-                        <th>Notes</th>
-                        <th>Action</th> 
-
+                        <th>Type</th>
+                        <th>Predition Date</th>
+                        <th>Recomended Action</th>
+                        <th>Risk</th>
+                        <th>Action</th>                      
                       </tr>
                     </tfoot>
                     <tbody>
                     <?php   
-                        for( $a=0; $a < count($data_detail); $a++)
+                        for( $a=0; ($a < count($data_detail) && $a < count($data_predict)); $a++)
                         {
                           print "<tr>";
                           print "<td>".$data_detail[$a]['Code']."</td>";
                           print "<td>".$data_detail[$a]['Building']."</td>";
                           print "<td>".$data_detail[$a]['Floor']."</td>";
-                          print "<td>".$data_detail[$a]['Room']."</td>";
-
-                          print "<td>".$data_detail[$a]['Type']."</td>";
                           print "<td>".$data_detail[$a]['Cubicle']."</td>";
-                          print "<td>".$data_detail[$a]['Component']."</td>";
-                          print "<td>".$data_detail[$a]['Installation Date']."</td>";
-
-                          print "<td>".$data_detail[$a]['Notes']."</td>";
-                          print '<td><a href="#" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#eventModal">Detail</a></td>';
-
+                          print "<td>".$data_detail[$a]['Type']."</td>";
+                          print "<td>".$data_predict[$a]['Prediction Date']."</td>";
+                          print "<td>".$data_predict[$a]['Recommended Action']."</td>";
+                          print "<td>".$data_predict[$a]['Risk Prediction']."</td>";
+                          print '<td><a href="#" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="">Detail</a></td>';
                         print"</tr>";
                         }
                     ?>                

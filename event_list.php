@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
   <html lang="en">
 
   <head>
@@ -74,7 +74,7 @@
                         <th>Floor</th>
                         <th>Type</th>
                         <th>Element</th>
-                        <th>Instalation Date</th>
+                        <th>Date</th>
                         <th>Type of Event</th>
                         <th>Action</th>                      
                       </tr>
@@ -86,7 +86,7 @@
                         <th>Floor</th>
                         <th>Type</th>
                         <th>Element</th>
-                        <th>Instalation Date</th>
+                        <th>Date</th>
                         <th>Type of Event</th>
                         <th>Action</th>
 
@@ -102,9 +102,9 @@
                           print "<td>".$data_detail[$a]['Floor']."</td>";
                           print "<td>".$data_detail[$a]['Type']."</td>";
                           print "<td>".$data_detail[$a]['Cubicle']."</td>";
-                          print "<td>".$data_event[$a]['Event Date']."</td>";
+                          print "<td>".$data_event[$a]['Date']."</td>";
                           print "<td>".$data_event[$a]['Event']."</td>";
-                          print "<td>"."<a href='#' id='$data_event[$a]['Code']' type='button' class='btn btn-success btn-md' data-toggle='modal' data-target='#eventModal'>"."Detail"."</a>"."</td>";
+                          print '<td><a href="#" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#eventModal">Detail</a></td>';
 
                         print"</tr>";
                         }
@@ -161,9 +161,9 @@
         </div>
       </div>
     </div>
-    <?php
-    print '<div class="modal fade" id="eventModal'.$data_event[$a]['Code'].'" tabindex="-1" role="dialog" aria-labelledby="eventModal" aria-hidden="true">;' 
-    ?>
+
+
+    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -177,8 +177,8 @@
             <div class="form-group row">
               <div class="col-md-12 col-sm-12">
               <?php    
-                  print "<img src=".$data_predict[$a]['Picture'].">";      
-                  
+                  print "<img src=".$data_predict[0]['Picture'].">";      
+                
               
               ?>
                 </div>
