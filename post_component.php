@@ -1,7 +1,6 @@
 <?php
 
 
-
 //API Url
 $url = 'http://188.166.221.219:5000/api/registry';
 
@@ -10,15 +9,14 @@ $ch = curl_init($url);
 
 //The JSON data.
 $jsonData = array(
+    'code' =>  $_POST['code'],
     'building' =>  $_POST['gedung'],
     'floor' => $_POST['lantai'],
     'room' => $_POST['room'],
-
     'c_type' =>  $_POST['c_type'],
     'cubicle' => $_POST['cabinet'],
-
     'component' =>  $_POST['element'],
-    'date' =>  $_POST['installDate'],
+    'date' =>  $_POST['date'],
     'notes' =>  $_POST['notes']
 );
 
@@ -37,5 +35,5 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 //Execute the request
 $result = curl_exec($ch);
 
-header("Location: add_component.php");
+ header("Location: add_component.php");
 ?>

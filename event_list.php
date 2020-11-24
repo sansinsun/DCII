@@ -58,7 +58,6 @@
             <!-- Page Heading -->
             <h1 class="h3 mb-2 text-gray-800">Event History</h1>
             <p class="mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
             <!-- DataTales Example -->
             <div class="card shadow mb-8">
               <div class="card-header py-4">
@@ -104,7 +103,8 @@
                           print "<td>".$data_detail[$a]['Cubicle']."</td>";
                           print "<td>".$data_event[$a]['Date']."</td>";
                           print "<td>".$data_event[$a]['Event']."</td>";
-                          print '<td><a href="#" type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#eventModal">Detail</a></td>';
+                          print '<td><button href="" data-key="'.$a.'" data-picture="'.$data_predict[$a]['Picture'].'" type="button" class="btn btn-success btn-md" onclick="showModal(this)">Detail</button>';
+                          
 
                         print"</tr>";
                         }
@@ -171,16 +171,13 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body text-center">
+        <div class="modal-body" id="">
+          <img src="" class="img-fluid text-center" alt="" id="modal-event-picture">
           <form>
               
             <div class="form-group row">
               <div class="col-md-12 col-sm-12">
-              <?php    
-                  print "<img src=".$data_predict[0]['Picture'].">";      
-                
-              
-              ?>
+          
                 </div>
             </div>
           </form>
@@ -203,8 +200,20 @@
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="js/demo/datatables-demo.js"></script>,
     
+    <script>
+      function showModal(e) {
+        var dataset = e.dataset;
+        $('#eventModal').modal('show');
+        $('#eventModal').on('shown.bs.modal', function(e) {console.log(dataset)
+
+          var picture_url = 'http://188.166.221.219/DCII/' + dataset.picture;
+          $('#eventModal #modal-event-picture').attr('src', picture_url);
+        });
+      }
+
+    </script>
    
 
   </body>

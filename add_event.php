@@ -30,7 +30,7 @@
           <div class="form-group row"">
             <label for="cuid" class="col-sm-2 col-form-label">Component Unique ID</label>
               <div class="col-sm-9">
-              <select class="form-control" id="kode" placeholder="event" required>
+              <select class="form-control" id="kode" name="code" required>
                 <option value="" selected disabled>Select Component Unique ID</option>
                 <?php   
                         for( $a=0; $a < count($data_detail); $a++)
@@ -44,7 +44,7 @@
           <div class="form-group row">
 	        	<label for="loc" class="col-sm-2 col-form-label">Type Of Event</label>
             <div class="col-sm-4">
-              <select class="form-control" id="nama_event" placeholder="event" required>
+              <select class="form-control" id="nama_event" name="nama" placeholder="event" required>
                 <option value="" selected disabled>Select Type of Event</option>
                 <option>Repair</option>
                 <option>Tighening</option>
@@ -57,22 +57,26 @@
 	        	<label for="loc" class="col-sm-2 col-form-label">Upload</label>
             </div>
             <!-- <form method="POST" action="post_event.php" enctype="multipart/form-data"> -->
-
-            <div class="custom-file col-sm-4">
-            <input type="file" name='myFile' class="custom-file-input" id="myFile"/>
+            <form action="upload.php" method="POST" enctype="multipart/form-data">
+            <div class="custom-file col-sm-3">
+            <input type="file" name='myFile' class="custom-file-input" id="myFile" value="Upload" />
                 <label class="custom-file-label" for="myFile">Choose file</label>
-
             </div>
+            <!-- <div class="input-group-prepend col-sm-1">
+              <button type="submit" value="Upload" class="btn btn-primary btn-md" data-toggle="modal" >Upload</button>
+          </div> -->
           </div>
+
+          </form>
             <!-- </form> -->
           <div class="form-group row">
             <label for="date" class="col-sm-2 col-form-label">Date Of Event</label>
             <div class="col-sm-4">
-              <input type="date" class="form-control" id="tgl" required>
+              <input type="date" class="form-control" id="tgl" name="date" required>
             </div>
           </div>
           
-          <button type="Submit" value="Upload File" data-target="#success" class="btn btn-primary btn-md" data-toggle="modal" style="float:right; margin-right:90px; width:150px;">Submit</button>
+          <button type="submit" value="Upload" data-toggle="modal" data-target="#success" class="btn btn-primary btn-md"  style="float:right; margin-right:90px; width:150px;">Save</a>
           <button type="reset" class="btn btn-danger btn-md" style="float:right; margin-right:20px; width:150px;">Cancel</button>
         </form>
       </div>
@@ -170,15 +174,15 @@ select:function(event, ui)
 }); //end of autocomplete
 
 </script>
-         <script>
-            $('#myFile').on('change',function(){
-                //get the file name
-                var fileName = $(this).val().split("\\").pop();;
+<script>
+  $('#myFile').on('change',function(){
+  //get the file name
+  var fileName = $(this).val().split("\\").pop();;
 
-                //replace the "Choose a file" label
-                $(this).next('.custom-file-label').html(fileName);
-            })
-        </script>
+  //replace the "Choose a file" label
+  $(this).next('.custom-file-label').html(fileName);
+   })
+</script>
 
 </body>
 </html>
