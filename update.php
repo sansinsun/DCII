@@ -8,7 +8,7 @@ $json_arr = json_decode($url, true);
 
 
 foreach ($json_arr as $a => $value) {
-    if ($value['code'] == $a) {
+    if ($value['ccode'] = $a) {
         $json_arr[$a]['code'] =>  $_POST['code'],
         $json_arr[$a]['building'] =>  $_POST['gedung'],
         $json_arr[$a]['floor'] => $_POST['lantai'],
@@ -31,6 +31,5 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $response  = curl_exec($ch);
 curl_close($ch);
 
-
-echo $json_arr;
+var_dump($_POST)
 ?>

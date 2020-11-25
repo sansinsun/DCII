@@ -26,11 +26,11 @@
         ?>
       <div class="container">
         <h1 class="text-center"><b>Add Event</b></h1>
-        <form method="POST" action="post_event_json.php">
+        <form method="POST" action="post_event_json.php" enctype="multipart/form-data" >
           <div class="form-group row"">
             <label for="cuid" class="col-sm-2 col-form-label">Component Unique ID</label>
               <div class="col-sm-9">
-              <select class="form-control" id="kode" name="code" required>
+              <select class="form-control" id="kode" name="kode" required>
                 <option value="" selected disabled>Select Component Unique ID</option>
                 <?php   
                         for( $a=0; $a < count($data_detail); $a++)
@@ -56,27 +56,22 @@
             <div class="input-group-prepend col-sm-1 ">
 	        	<label for="loc" class="col-sm-2 col-form-label">Upload</label>
             </div>
-            <!-- <form method="POST" action="post_event.php" enctype="multipart/form-data"> -->
-            <form action="upload.php" method="POST" enctype="multipart/form-data">
-            <div class="custom-file col-sm-3">
-            <input type="file" name='myFile' class="custom-file-input" id="myFile" value="Upload" />
-                <label class="custom-file-label" for="myFile">Choose file</label>
+            <div class="custom-file col-sm-2">
+            <input type="file" name="myFile" class="custom-file-input" id="myFile" value="Upload"/>
+                <label class="custom-file-label" for="file">Choose file</label>
             </div>
-            <!-- <div class="input-group-prepend col-sm-1">
-              <button type="submit" value="Upload" class="btn btn-primary btn-md" data-toggle="modal" >Upload</button>
-          </div> -->
-          </div>
 
-          </form>
-            <!-- </form> -->
+            </div>
+
+
           <div class="form-group row">
             <label for="date" class="col-sm-2 col-form-label">Date Of Event</label>
             <div class="col-sm-4">
-              <input type="date" class="form-control" id="tgl" name="date" required>
+              <input type="date" class="form-control" id="tgl" name="tgl" required>
             </div>
           </div>
           
-          <button type="submit" value="Upload" data-toggle="modal" data-target="#success" class="btn btn-primary btn-md"  style="float:right; margin-right:90px; width:150px;">Save</a>
+          <button type="submit" value="Upload" data-target="#success" class="btn btn-primary btn-md" data-toggle="modal" style="float:right; margin-right:90px; width:150px;">Submit</button>
           <button type="reset" class="btn btn-danger btn-md" style="float:right; margin-right:20px; width:150px;">Cancel</button>
         </form>
       </div>
